@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using SalesWevMVCAtual.Data;
+using SalesWevMVCAtual.Services;
 
 namespace SalesWevMVCAtual
 {
@@ -41,6 +42,7 @@ namespace SalesWevMVCAtual
                         builder.MigrationsAssembly("SalesWevMVCAtual")));
 
             services.AddScoped<SeedingService>();
+            services.AddScoped<SellerService>();
         
         }
 
