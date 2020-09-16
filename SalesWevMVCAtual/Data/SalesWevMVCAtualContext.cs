@@ -14,6 +14,10 @@ namespace SalesWevMVCAtual.Data
         {
         }
 
-        public DbSet<SalesWevMVCAtual.Models.Department> Department { get; set; }
+        //public DbSet<SalesWevMVCAtual.Models.Department> Department { get; set; }  outra maneira de conectar a minha tabela na base de dados.
+        public DbSet<Department> Department { get; set; }
+        public DbSet<Seller> Seller { get; set; }
+        public DbSet<SalesRecord> SalesRecord { get; set; }
+
     }
 }
