@@ -20,5 +20,11 @@ namespace SalesWevMVCAtual.Services
         {
             return _context.Seller.ToList();
         }
+
+        public void InsertNewSeller(Seller obj)
+        {
+            _context.Add(obj);
+            _context.SaveChanges();
+        }
     }
 }

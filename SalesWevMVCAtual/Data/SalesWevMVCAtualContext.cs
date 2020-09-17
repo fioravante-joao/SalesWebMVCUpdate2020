@@ -9,7 +9,11 @@ namespace SalesWevMVCAtual.Data
 {
     public class SalesWevMVCAtualContext : DbContext
     {
-        public SalesWevMVCAtualContext (DbContextOptions<SalesWevMVCAtualContext> options)
+        public SalesWevMVCAtualContext()  //Construtor sem argumentos
+        {
+        }
+
+        public SalesWevMVCAtualContext (DbContextOptions<SalesWevMVCAtualContext> options) //Construtor com argumentos
             : base(options)
         {
         }

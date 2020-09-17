@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SalesWevMVCAtual.Models;
 using SalesWevMVCAtual.Services;
 
 namespace SalesWevMVCAtual.Controllers
@@ -20,6 +21,19 @@ namespace SalesWevMVCAtual.Controllers
         {
             var list = _sellerService.FindAll();
             return View(list);
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]  //Segurança
+        public IActionResult Create(Seller seller)
+        {
+            _sellerService.InsertNewSeller(seller);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
