@@ -23,6 +23,7 @@ namespace SalesWevMVCAtual.Services
 
         public void InsertNewSeller(Seller obj)
         {
+            obj.Department = _context.Department.First();
             _context.Add(obj);
             _context.SaveChanges();
         }
