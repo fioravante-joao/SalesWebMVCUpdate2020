@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using SalesWevMVCAtual.Models;
 using SalesWevMVCAtual.Services;
 using SalesWevMVCAtual.Models.ViewModels;
+using SalesWevMVCAtual.Services.Exceptions;
 
 namespace SalesWevMVCAtual.Controllers
 {
@@ -78,6 +79,47 @@ namespace SalesWevMVCAtual.Controllers
             }
 
             return View(obj);
+        }
+
+        public IActionResult Editar(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+            var obj = _sellerService.FindById(id.Value);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            List<Department> departments = _departmentService.FindAll();
+            SellerFormViewModel viewModel = new SellerFormViewModel { Seller = obj, Departments = departments };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Editar(int id, Seller seller)
+        {
+            if (id != seller.Id)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                _sellerService.Update(seller);
+                return RedirectToAction(nameof(Index)); // "Index"
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
+            catch (DbConcurrencyException)
+            {
+                return BadRequest();
+            }
         }
     }
 }
