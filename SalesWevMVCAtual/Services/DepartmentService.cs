@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace SalesWevMVCAtual.Services
 {
@@ -16,10 +17,10 @@ namespace SalesWevMVCAtual.Services
             _context = context;
         }
 
-        public List<Department> FindAll()
+        public async Task<List<Department>> FindAllAsync()
         {
             //return _context.Department.ToList();
-            return _context.Department.OrderBy(x => x.Name).ToList();    //Lista ordenada por nome
+            return await _context.Department.OrderBy(x => x.Name).ToListAsync();    //Lista ordenada por nome
         }
     }
 }
