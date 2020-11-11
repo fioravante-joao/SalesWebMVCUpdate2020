@@ -39,6 +39,13 @@ namespace SalesWevMVCAtual.Controllers
         [ValidateAntiForgeryToken]  //Segurança
         public IActionResult Create(Seller seller)
         {
+            if (!ModelState.IsValid)
+            {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
+                return View(viewModel);
+            }
+
             _sellerService.InsertNewSeller(seller);
             return RedirectToAction(nameof(Index));
         }
@@ -103,6 +110,13 @@ namespace SalesWevMVCAtual.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Editar(int id, Seller seller)
         {
+            if (!ModelState.IsValid)
+            {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
+                return View(viewModel);
+            }
+
             if (id != seller.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id Não corresponde" });
